@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= page.title %></title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="public/assets/css/bootstrap.min.css" rel="Stylesheet" type="text/css"/>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="public/assets/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="public/assets/dist/css/skins/_all-skins.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="hold-transition login-page">
+    <div class="login-box">
+      <div class="login-logo">
+        <a href="../../index2.html"><b><%= page.portal_name %></b>Portal</a>
+      </div><!-- /.login-logo -->
+      <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+        <div class="alert alert-danger alert-dismissable" id="msg" style="display:none">
+          <button type="button" class="close" id="msghidden">&times;</button>
+          <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+          <p>Message Here</p>
+        </div>
+        <form action="../../index2.html" method="post">
+          <div class="form-group has-feedback">
+            <input type="email" class="form-control" id="email" placeholder="Email">
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="password" class="form-control"  id="password" placeholder="Password">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          </div>
+          <div class="row">
+            <div class="col-xs-8">
+            </div><!-- /.col -->
+            <div class="col-xs-4">
+              <button type="submit" id="btnsign" class="btn btn-primary btn-block btn-flat">Sign In</button>
+            </div><!-- /.col -->
+          </div>
+        </form>
+
+      </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
+
+    <script src="public/assets/js/jquery.min.js"></script>
+    <script src="public/assets/js/bootstrap.min.js"></script>
+
+    <!-- AdminLTE App -->   
+    <script src="public/assets/dist/js/app.min.js"></script>
+
+    <!-- Sparkline -->
+    <script src="public/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+    <script>
+      $(function () {
+          $('#btnsign').on('click',function(e){
+            e.preventDefault();
+            $.post( "login", { email: $('#email').val(), password: $('#password').val() })
+            .done(function( data ) {
+                if(data.msg == ""){
+                  window.location.href = '/account';
+                }else{
+                  $('#msg').show().find('p').text(data.msg);
+                }
+            });
+          });
+          $('#msghidden').on('click',function(e){
+            e.preventDefault();
+            $('#msg').hide();
+          });
+      });
+    </script>
+  </body>
+</html>

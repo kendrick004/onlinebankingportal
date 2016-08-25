@@ -1,0 +1,15 @@
+<!-- Sidebar Menu -->
+<ul class="sidebar-menu">
+    <li class="header">NAVIGATION</li>
+        <!-- Optionally, you can add icons to the links -->
+        <% for(var i=0; i < nav.length; i++) { %>
+            <% if(nav[i].active == 1) { %>
+                <li class="active">
+            <% }else{ %>
+                <li>
+            <% }%>
+                    <a href="<%= nav[i].path %>"><i class="fa <%= nav[i].icon %>"></i> <span><%= nav[i].name %></span></i></a>
+                </li>
+        <% } %>
+    </li>
+</ul>
