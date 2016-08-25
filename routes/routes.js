@@ -10,9 +10,9 @@ module.exports = function(app){
 
 	app.get('/login', function(req, res){
 		var page = {
-			title: 'Bills Payment | Login Page',
+			title: 'Online Banking | Login Page',
 			name: 'Login Page',
-			portal_name: 'Online Bills'
+			portal_name: 'Online Banking'
 		};
 
 		res.render('pages/login', {
@@ -119,9 +119,9 @@ module.exports = function(app){
 
 	app.get('/account', function(req, res){
 		var page = {
-			title: 'Bills Payment | Account Page',
+			title: 'Online Banking | Account Page',
 			name: 'Account Page',
-			portal_name: 'Online Bills'
+			portal_name: 'Online Banking'
 		};
 		if(req.session.login){
 			var page_nav = app.get('navigation');
@@ -162,9 +162,9 @@ module.exports = function(app){
 
 	app.get('/transfer', function(req, res){
 		var page = {
-			title: 'Bills Payment | Transfer Page',
+			title: 'Online Banking | Transfer Page',
 			name: 'Transfer Page',
-			portal_name: 'Online Bills'
+			portal_name: 'Online Banking'
 		};
 
 		if(!req.session.login){
@@ -192,9 +192,9 @@ module.exports = function(app){
 
 	app.get('/payment', function(req, res){
 		var page = {
-			title: 'Bills Payment | Payment Page',
+			title: 'Online Banking | Payment Page',
 			name: 'Payment Page',
-			portal_name: 'Online Bills'
+			portal_name: 'Online Banking'
 		};
 
 		if(!req.session.login){
@@ -222,9 +222,9 @@ module.exports = function(app){
 
 	app.get('/branches', function(req, res){
 		var page = {
-			title: 'Bills Payment | Branches Page',
+			title: 'Online Banking | Branches Page',
 			name: 'Branches Page',
-			portal_name: 'Online Bills'
+			portal_name: 'Online Banking'
 		};
 
 		if(!req.session.login){
@@ -268,9 +268,9 @@ module.exports = function(app){
 
 	app.get('/atms', function(req, res){
 		var page = {
-			title: 'Bills Payment | ATMs Page',
+			title: 'Online Banking | ATMs Page',
 			name: 'ATMs Page',
-			portal_name: 'Online Bills'
+			portal_name: 'Online Banking'
 		};
 
 		if(!req.session.login){
@@ -314,9 +314,9 @@ module.exports = function(app){
 
 	app.get('/loan', function(req, res){
 		var page = {
-			title: 'Bills Payment | Loan Calculator Page',
+			title: 'Online Banking | Loan Calculator Page',
 			name: 'Loan Calculator Page',
-			portal_name: 'Online Bills'
+			portal_name: 'Online Banking'
 		};
 
 		if(!req.session.login){
