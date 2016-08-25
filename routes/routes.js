@@ -131,6 +131,7 @@ module.exports = function(app){
 			page_nav[3].active = 0;
 			page_nav[4].active = 0;
 			page_nav[5].active = 0;
+			page_nav[6].active = 0;
 
 			var options = { 
 				method: 'GET',
@@ -178,6 +179,7 @@ module.exports = function(app){
 			page_nav[3].active = 0;
 			page_nav[4].active = 0;
 			page_nav[5].active = 0;
+			page_nav[6].active = 0;
 
 			res.render('pages/transfer', {
 				page: page,
@@ -207,6 +209,7 @@ module.exports = function(app){
 			page_nav[3].active = 0;
 			page_nav[4].active = 0;
 			page_nav[5].active = 0;
+			page_nav[6].active = 0;
 
 			res.render('pages/payment', {
 				page: page,
@@ -249,6 +252,7 @@ module.exports = function(app){
 					page_nav[3].active = 1;
 					page_nav[4].active = 0;
 					page_nav[5].active = 0;
+					page_nav[6].active = 0;
 
 					res.render('pages/branches', {
 						page: page,
@@ -294,6 +298,7 @@ module.exports = function(app){
 					page_nav[3].active = 0;
 					page_nav[4].active = 1;
 					page_nav[5].active = 0;
+					page_nav[6].active = 0;
 
 					res.render('pages/atms', {
 						page: page,
@@ -305,5 +310,62 @@ module.exports = function(app){
 				}
 			});
 		}
+	});
+
+	app.get('/loan', function(req, res){
+		var page = {
+			title: 'Bills Payment | Loan Calculator Page',
+			name: 'Loan Calculator Page',
+			portal_name: 'Online Bills'
+		};
+
+		if(!req.session.login){
+			res.redirect('/login');
+		}else if(!req.session.account_details){
+			res.redirect('/account');
+		}else{
+
+			var page_nav = app.get('navigation');
+			page_nav[0].active = 0;
+			page_nav[1].active = 0;
+			page_nav[2].active = 0;
+			page_nav[3].active = 0;
+			page_nav[4].active = 0;
+			page_nav[5].active = 1;
+			page_nav[6].active = 0;
+
+			res.render('pages/loan', {
+				page: page,
+				nav: page_nav,
+				user: ((req.session.login) ? req.session.login : {}),
+				details: ((req.session.account_details) ? req.session.account_details : {})
+			});
+		}
+	});
+
+	app.post('/loan', function(req, res){
+		var options = { 
+			method: 'GET',
+		  	url: app.get('rest_url') + '/Loans/compute',
+		  	qs: req.body,
+		  	headers: app.get('request_headers')
+	     };
+
+     	request(options, function (error, response, body) {
+		  if (error) return console.error('Failed: %s', error.message);
+			var json_data = JSON.parse(body);
+			if(json_data.httpCode){
+				res.send({
+					status: 0,
+					qs: req.query
+				});
+			}else{
+				res.send({
+					result: json_data,
+					status: 1,
+					qs: req.query
+				});
+			}
+		});
 	});
 }

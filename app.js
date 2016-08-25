@@ -58,6 +58,7 @@ var navigation = [
 	{path: '/payment', name: 'Payment', active: 0, icon: ' fa-money'},
 	{path: '/branches', name: 'Branch List', active: 0, icon: 'fa-bank'},
 	{path: '/atms', name: 'ATM List', active: 0, icon: 'fa-map-marker'},
+	{path: '/loan', name: 'Loan Calculator', active: 0, icon: 'fa-calculator'},
 	{path: '/logout', name: 'Sign-Out', active: 0, icon: 'fa-sign-out'}
 ];
 

@@ -11,8 +11,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="public/assets/plugins/select2/select2.min.css">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="public/assets/plugins/datatables/dataTables.bootstrap.css">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="public/assets/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -78,7 +80,34 @@
                             <h3 class="box-title">ATMs</h3>
                         </div><!-- /.box-header -->
                         <div class="box-body">
-                            <div id="map" style="height:400px;">
+                            <div class="col-md-6">
+                                <div id="map" style="height:500px;">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <table id="dtable" class="table table-bordered table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>ID</th>
+                                    <th>Name<br>Address</th>
+                                    <th>Latitude</th>
+                                    <th>Longitude</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(var i=0;i < atms.length; i++){ %>
+                                    <tr>
+                                        <% var atm = atms[i]; %>
+                                        <td><%= atm.id %></td>
+                                        <td><strong><%= atm.name %></strong><br><span style="font-size: 10px;"><%= atm.address %></span></td>
+                                        <td><%= atm.latitude %></td>
+                                        <td><%= atm.longitude %></td>
+                                        <td><button id="<%= i %>" class="btn btn-flat btn-sm btn-primary views">VIEW</button></td>
+                                    </tr>
+                                    <% } %>
+                                </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -94,6 +123,10 @@
     <script src="public/assets/js/jquery.min.js"></script>
     <script src="public/assets/js/bootstrap.min.js"></script>
 
+    <!-- DataTables -->
+    <script src="public/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="public/assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    
     <!-- AdminLTE App -->   
     <script src="public/assets/dist/js/app.min.js"></script>
     <!-- SlimScroll -->
@@ -111,6 +144,24 @@
     var atms = <%- JSON.stringify(atms) %>;
     $(function () {
         var details = <%- JSON.stringify(details) %>;
+
+        $('#dtable').DataTable({
+            "paging": true,
+            "lengthMenu": [5, 10, 20, 30, 50],
+            "pageLength": 5,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": false,
+            "info": true,
+            "autoWidth": true
+        });
+
+        $('.views').on('click',function(){
+            var marker = markers[$(this).attr('id')];
+            new google.maps.event.trigger( marker, 'click' );
+            map.setZoom(20);
+            map.setCenter(marker.getPosition())
+        });
     });
 
     function initMap(){
