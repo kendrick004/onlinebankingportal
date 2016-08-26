@@ -62,12 +62,9 @@ var navigation = [
 	{path: '/logout', name: 'Sign-Out', active: 0, icon: 'fa-sign-out'}
 ];
 
-//app.set('client-id', '491f8bd9-a068-4220-a226-aa5695cc40fd');
-//app.set('client-secret', 'J8uC0lM2uJ1oK6bC3pU5sW2iJ2vV7cF7pD5qH6kE7dT7wV6uV1');
-//app.set('rest_url', 'https://api.us.apiconnect.ibmcloud.com/ubp-dev/sb/api');
-app.set('client-id', 'e66e3a7a-8ab0-4f59-917a-860b0c0a1bdc');
-app.set('client-secret', 'cQ4aG6rU5gQ0rS4rM2sM6pF7gE5gK3vV1lB0uG6qI4vC1lX6dQ');
-app.set('rest_url', 'https://api.us.apiconnect.ibmcloud.com/unionbank-unionbank-hackathon/sb/api');
+app.set('client-id', 'a78e533e-e6a7-459c-a822-e38f6c79dcf9');
+app.set('client-secret', 'cS1mU5xX2bF4lT8rO4mW4hV8qE6vP3qH5hP0eQ6tF7hV6kB5vN');
+app.set('rest_url', 'https://api.us.apiconnect.ibmcloud.com/ubpapi-dev/sb/api');
 app.set('request_headers',	
 		{
  			'accept': 'application/json',
