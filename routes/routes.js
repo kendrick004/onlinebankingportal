@@ -3,6 +3,7 @@
 var request = require('request');
 
 module.exports = function(app){
+
 	app.get('/logout', function(req, res){
 		req.session.destroy();
     	res.redirect('/login');
@@ -366,6 +367,48 @@ module.exports = function(app){
 					qs: req.query
 				});
 			}
+		});
+	});
+
+	app.post('/create/account',function(req, res){
+		var options = { 
+			method: 'POST',
+		  	url: 'http://apidev.unionbankph.com/api/Accounts',
+		  	headers: { 			
+				'accept': 'application/json',
+				'content-type': 'application/json'
+			},
+		  	json: true,
+		  	body: req.body
+	     };
+     	request(options, function (error, response, body) {
+		  if (error) return console.error('Failed: %s', error.message);
+			var json_data = body;
+			if(json_data.httpCode){
+				res.send({
+					status: 0,
+					body: req.body,
+					msg: error.message
+				});
+			}else{
+				res.send({
+					result: json_data,
+					status: 1,
+					body: req.body
+				});
+			}
+		});
+	});
+
+	app.get('/create/account',function(req, res){
+		var page = {
+			title: 'Account Creation Page',
+			name: 'Account Creation Page',
+			portal_name: 'Online Banking'
+		};
+
+		res.render('pages/account', {
+			page: page
 		});
 	});
 }
